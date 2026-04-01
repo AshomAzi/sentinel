@@ -4,7 +4,7 @@ import "strings"
 
 // operation gopher protocol: Article feature Handled by Fellow Enock Victor
 func articleA(text string) string {
-	// text = strings.ToLower(text)
+	text = strings.ToLower(text)
 	words := strings.Fields(text)
 	for i := 0; i < len(words)-1; i++ {
 		nextWord := words[i+1][:1]
@@ -20,5 +20,5 @@ func articleA(text string) string {
 
 	}
 	res := strings.Join(words, " ")
-	return strings.ToUpper(string(res[:0])) + strings.ToLower(res[0:])
+	return strings.ToUpper(res[:1]) + strings.ToLower(res[1:])
 }
