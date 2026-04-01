@@ -5,5 +5,11 @@ import (
 )
 
 func Lower(s string) string {
-	return strings.ToLower(s)
+	new := strings.Fields(s)
+	
+	for i := 0; i < len(new); i++ {
+		
+	}
+	return strings.Join(new, " ")
 }
+

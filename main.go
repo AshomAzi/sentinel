@@ -27,9 +27,12 @@ func main() {
 	for text.Scan() {
 		line := text.Text()
 
-		new := Capitalize(line)
 
-		new = articleA(new)
+		new := articleA(line)
+		new = Capitalize(new)
+		new = Allhex(new)
+		new = Quotes(new)
+
 
 		_, err := writer.WriteString(new + "\n")
 		if err != nil {

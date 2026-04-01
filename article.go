@@ -1,24 +1,42 @@
 package main
 
-import "strings"
+import (
+    "strings"
+)
 
-// operation gopher protocol: Article feature Handled by Fellow Enock Victor
 func articleA(text string) string {
-	text = strings.ToLower(text)
-	words := strings.Fields(text)
-	for i := 0; i < len(words)-1; i++ {
-		nextWord := words[i+1][:1]
-		vowels := "aeiouh"
-		consonants := "bcdfgjklmnpqrstvwxyz"
-		if words[i] == "a" && strings.ContainsAny(strings.ToLower(nextWord), vowels) {
-			words[i] = "an"
-		}
+    words := strings.Fields(text)
+    if len(words) == 0 {
+        return text
+    }
 
-		if words[i] == "an" && strings.ContainsAny(strings.ToLower(nextWord), consonants) {
-			words[i] = "a"
-		}
+    vowels := "aeiouhAEIOUH"
+    consonants := "bcdfgjklmnpqrstvwxyzBCDFGJKLMNPQRSTVWXYZ"
 
-	}
-	res := strings.Join(words, " ")
-	return strings.ToUpper(res[:1]) + strings.ToLower(res[1:])
+    for i := 0; i < len(words)-1; i++ {
+        currentWord := strings.ToLower(words[i])
+        if len(words[i+1]) == 0 {
+            continue
+        }
+        
+        nextWordFirstChar := string(words[i+1][0])
+
+        if currentWord == "a" && strings.ContainsAny(nextWordFirstChar, vowels) {
+            if words[i] == "A" {
+                words[i] = "An"
+            } else {
+                words[i] = "an"
+            }
+        }
+
+        if currentWord == "an" && strings.ContainsAny(nextWordFirstChar, consonants) {
+            if words[i] == "An" {
+                words[i] = "A"
+            } else {
+                words[i] = "a"
+            }
+        }
+    }
+
+    return strings.Join(words, " ")
 }
